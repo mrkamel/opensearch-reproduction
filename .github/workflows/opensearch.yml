@@ -2,6 +2,7 @@ on: push
 name: opensearch
 jobs:
   opensearch:
+    runs-on: ubuntu-latest
     services:
       opensearch:
         image: opensearchproject/opensearch:2.13.0
