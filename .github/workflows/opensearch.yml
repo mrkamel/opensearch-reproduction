@@ -15,7 +15,7 @@ jobs:
           plugins.security.disabled: "true"
           ES_JAVA_OPTS: "-Xms512m -Xmx512m"
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: "${{ secrets.OPENSEARCH_PASSWORD }}"
-          _JAVA_OPTIONS: "-Djava.io.tmpdir=/new/tmp/dir"
+          _JAVA_OPTIONS: "-Djava.io.tmpdir=/home"
         options: >-
           --health-cmd "curl http://localhost:9200/_cluster/health"
           --health-interval 10s 
