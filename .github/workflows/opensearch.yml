@@ -15,11 +15,23 @@ jobs:
           plugins.security.disabled: "true"
           ES_JAVA_OPTS: "-Xms512m -Xmx512m"
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: "${{ secrets.OPENSEARCH_PASSWORD }}"
+          _JAVA_OPTIONS: "-Djava.io.tmpdir=/new/tmp/dir"
         options: >-
           --health-cmd "curl http://localhost:9200/_cluster/health"
           --health-interval 10s 
           --health-timeout 5s
           --health-retries 10
+      redis:
+        image: public.ecr.aws/docker/library/redis:6.2-alpine
+      dynamodb:
+        image: amazon/dynamodb-local:1.13.0
+      postgres:
+        image: public.ecr.aws/docker/library/postgres:13-alpine
+        env:
+          DATABASE_DB: opensearch
+          DATABASE_HOST: postgres
+          DATABASE_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - name: noop
         run: echo noop
